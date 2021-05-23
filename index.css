@@ -1,0 +1,65 @@
+html {
+    margin: 0;
+    background-color: rgb(194, 192, 192);
+}
+
+body {
+    margin-top: 10vh;
+}
+
+header {
+    margin: 0px;
+    height: 10vh;
+    text-align: center;
+}
+
+h1{
+    margin: 0;
+}
+
+main {
+    text-align: center;
+}
+
+form {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+input {
+    background-color: black;
+    color:whitesmoke;
+}
+
+button {
+    background-color: black;
+    color: whitesmoke;
+}
+
+@media screen and (max-width: 700px) {
+    html {
+        font-size: 0.7rem;
+    }
+
+    form {
+        display: flex;
+        height: 15vh;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    span {
+        display: flex;
+        justify-content:space-between;
+    }
+
+    input {
+        width: 70%;
+    }
+    
+    #lastButton {
+        width: max-content;
+        align-self: center;
+    }
+}

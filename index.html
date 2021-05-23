@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <header>
+        <h1>Roman Numeral Converter</h1>
+    </header>
+    <main>
+        <button type="button" onclick="swap()">Convert to Arabic Number</button>
+        <form>
+            <span>
+                <label >Integer</label> &nbsp;
+                <input type="number" id="myinput" oninput="textValidator()" placeholder="type here...">
+            </span>
+            <span>
+                <label>Roman Numeral</label> &nbsp;
+                <input  type="text" id="myinput2" disabled>
+            </span>
+            <button id="lastButton" type="button" onclick="myFunction()"> Click to Convert</button>
+        </form>
+    </main>
+</body>
+<script>
+        
+    function swap() {
+        let text = document.querySelector('button');
+        let text2 = document.querySelectorAll('label');
+        input = document.querySelectorAll('input');
+        let changeConvertTexts= (() => {
+            if (text.textContent === "Convert to Arabic Number") {
+                text.innerText = "Convert to Roman Numeral";
+                text2[0].innerText = "Roman Numeral";
+                input[0].setAttribute('type', 'text');
+                text2[1].innerText = "Integer";
+                input[1].setAttribute('type', 'number');
+            } else {
+                text.innerText = "Convert to Arabic Number";
+                text2[0].innerText = "Integer";
+                input[0].setAttribute('type', 'number');
+                text2[1].innerText = "Roman Numeral";
+                input[1].setAttribute('type', 'text');
+            }
+        }); changeConvertTexts();
+    }
+    
+    function textValidator() {
+        let text = document.querySelectorAll('button');
+        if (text[0].textContent === "Convert to Roman Numeral") {
+            testRegex = /[A-Z]/;
+            if (!testRegex.test(input[0].value)) {
+                alert('invalid, input a valid Roman Numeral in UPPERCASE');
+            }
+        }     
+    }; 
+        
+    function myFunction() {
+
+        const ap = "https://romans.justyy.workers.dev/api/romans/?cached&n=";
+        let inputVal = document.getElementById('myinput').value;
+        let url = `${ap}${inputVal}`;
+
+
+        let myCall = (()=> {
+
+            let main = new XMLHttpRequest();
+            main.onreadystatechange = function() {
+                if (this.readyState==4 && this.status==200) {
+                    var data = JSON.parse(this.responseText);
+                    let errorCheck = data.error;
+
+                    if (errorCheck == null) { console.log(data)
+                        document.getElementById('myinput2').value= data.result;
+                    } else {
+                        alert(`Invalid`);
+                    }
+                }
+            };
+            main.open("GET", url, true);
+            main.send();
+        }); myCall();
+    }
+
+</script>
+</html>
