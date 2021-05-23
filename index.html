@@ -16,7 +16,7 @@
         <form>
             <span>
                 <label >Integer</label> &nbsp;
-                <input type="number" id="myinput" oninput="textValidator()" placeholder="type here...">
+                <input type="number" id="myinput"  placeholder="type here...">
             </span>
             <span>
                 <label>Roman Numeral</label> &nbsp;
@@ -27,7 +27,7 @@
     </main>
 </body>
 <script>
-        
+     //This function toggles the button that switches conversion 
     function swap() {
         let text = document.querySelector('button');
         let text2 = document.querySelectorAll('label');
@@ -49,18 +49,9 @@
         }); changeConvertTexts();
     }
     
-    function textValidator() {
-        let text = document.querySelectorAll('button');
-        if (text[0].textContent === "Convert to Roman Numeral") {
-            testRegex = /[A-Z]/;
-            if (!testRegex.test(input[0].value)) {
-                alert('invalid, input a valid Roman Numeral in UPPERCASE');
-            }
-        }     
-    }; 
-        
+    //API call
     function myFunction() {
-
+        
         const ap = "https://romans.justyy.workers.dev/api/romans/?cached&n=";
         let inputVal = document.getElementById('myinput').value;
         let url = `${ap}${inputVal}`;
@@ -77,7 +68,9 @@
                     if (errorCheck == null) { console.log(data)
                         document.getElementById('myinput2').value= data.result;
                     } else {
-                        alert(`Invalid`);
+                        alert(`Invalid
+                                interger value must be greater than 0
+                                roman text is expected to be UPPERCASE`);
                     }
                 }
             };
